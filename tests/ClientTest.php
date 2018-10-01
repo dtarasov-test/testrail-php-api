@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use seretos\testrail\api\Projects;
+use seretos\testrail\api\Suites;
 use seretos\testrail\Client;
 use seretos\testrail\connector\ApiConnectorInterface;
 
@@ -42,5 +43,19 @@ class ClientTest extends TestCase
      */
     public function apiProjects(){
         $this->assertInstanceOf(Projects::class,$this->client->api('projects'));
+    }
+
+    /**
+     * @test
+     */
+    public function suites(){
+        $this->assertInstanceOf(Suites::class,$this->client->suites());
+    }
+
+    /**
+     * @test
+     */
+    public function apiSuites(){
+        $this->assertInstanceOf(Suites::class,$this->client->api('suites'));
     }
 }
