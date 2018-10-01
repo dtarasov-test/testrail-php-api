@@ -1,9 +1,12 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use seretos\testrail\api\Cases;
 use seretos\testrail\api\Projects;
 use seretos\testrail\api\Sections;
 use seretos\testrail\api\Suites;
+use seretos\testrail\api\Templates;
+use seretos\testrail\api\Types;
 use seretos\testrail\Client;
 use seretos\testrail\connector\ApiConnectorInterface;
 
@@ -72,5 +75,47 @@ class ClientTest extends TestCase
      */
     public function apiSections(){
         $this->assertInstanceOf(Sections::class,$this->client->api('sections'));
+    }
+
+    /**
+     * @test
+     */
+    public function cases(){
+        $this->assertInstanceOf(Cases::class,$this->client->cases());
+    }
+
+    /**
+     * @test
+     */
+    public function apiCases(){
+        $this->assertInstanceOf(Cases::class,$this->client->api('cases'));
+    }
+
+    /**
+     * @test
+     */
+    public function templates(){
+        $this->assertInstanceOf(Templates::class,$this->client->templates());
+    }
+
+    /**
+     * @test
+     */
+    public function apiTemplates(){
+        $this->assertInstanceOf(Templates::class,$this->client->api('templates'));
+    }
+
+    /**
+     * @test
+     */
+    public function types(){
+        $this->assertInstanceOf(Types::class,$this->client->types());
+    }
+
+    /**
+     * @test
+     */
+    public function apiTypes(){
+        $this->assertInstanceOf(Types::class,$this->client->api('types'));
     }
 }
