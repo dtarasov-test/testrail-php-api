@@ -36,10 +36,10 @@ class SuitesTest extends TestCase
     public function all(){
         $this->mockApiConnector->expects($this->once())
             ->method('send_get')
-            ->with('get_suites')
+            ->with('get_suites/1')
             ->will($this->returnValue([['id' => 1,'name' => 'testSuite1'],['id' => 2,'name' => 'testSuite2']]));
 
-        $this->assertSame([['id' => 1,'name' => 'testSuite1'],['id' => 2,'name' => 'testSuite2']],$this->suites->all());
+        $this->assertSame([['id' => 1,'name' => 'testSuite1'],['id' => 2,'name' => 'testSuite2']],$this->suites->all(1));
     }
 
     /**
@@ -60,10 +60,10 @@ class SuitesTest extends TestCase
     public function findByName(){
         $this->mockApiConnector->expects($this->once())
             ->method('send_get')
-            ->with('get_suites')
+            ->with('get_suites/1')
             ->will($this->returnValue([['id' => 1,'name' => 'testSuite1'],['id' => 2,'name' => 'testSuite2']]));
 
-        $this->assertSame(['id' => 2,'name' => 'testSuite2'],$this->suites->findByName('testSuite2'));
+        $this->assertSame(['id' => 2,'name' => 'testSuite2'],$this->suites->findByName(1,'testSuite2'));
     }
 
     /**
@@ -72,11 +72,11 @@ class SuitesTest extends TestCase
     public function create(){
         $this->mockApiConnector->expects($this->once())
             ->method('send_post')
-            ->with('add_suite',['name' => 'myTestSuite',
+            ->with('add_suite/1',['name' => 'myTestSuite',
                 'description' => null])
             ->will($this->returnValue(['id' => 1,'name' => 'myTestSuite']));
 
-        $this->assertSame(['id' => 1,'name' => 'myTestSuite'],$this->suites->create('myTestSuite'));
+        $this->assertSame(['id' => 1,'name' => 'myTestSuite'],$this->suites->create(1,'myTestSuite'));
     }
 
     /**

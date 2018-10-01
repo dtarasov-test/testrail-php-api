@@ -11,9 +11,9 @@ namespace seretos\testrail\api;
 
 class Suites extends AbstractApi
 {
-    public function all()
+    public function all(int $projectId)
     {
-        return $this->connector->send_get('get_suites');
+        return $this->connector->send_get('get_suites/'.$this->encodePath($projectId));
     }
 
     public function get(int $suiteId)
@@ -21,9 +21,9 @@ class Suites extends AbstractApi
         return $this->connector->send_get('get_suite/' . $this->encodePath($suiteId));
     }
 
-    public function findByName(string $name)
+    public function findByName(int $projectId, string $name)
     {
-        $allProjects = $this->all();
+        $allProjects = $this->all($projectId);
         foreach ($allProjects as $project) {
             if ($project['name'] === $name) {
                 return $project;
@@ -32,9 +32,9 @@ class Suites extends AbstractApi
         return [];
     }
 
-    public function create(string $name, string $description = null)
+    public function create(int $projectId, string $name, string $description = null)
     {
-        return $this->connector->send_post('add_suite',
+        return $this->connector->send_post('add_suite/'.$this->encodePath($projectId),
             ['name' => $name,
                 'description' => $description]);
     }
