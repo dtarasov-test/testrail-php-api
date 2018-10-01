@@ -1,5 +1,5 @@
 <?php
-namespace seretos\testrail;
+namespace seretos\testrail\connector;
 
 /**
  * TestRail API binding for PHP (API v2, available since TestRail 3.0)
@@ -12,7 +12,7 @@ namespace seretos\testrail;
  * Copyright Gurock Software GmbH. See license.md for details.
  */
 
-class TestRailAPIClient
+class TestRailAPIClient implements ApiConnectorInterface
 {
     private $_user;
     private $_password;

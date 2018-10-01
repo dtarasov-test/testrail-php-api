@@ -19,6 +19,9 @@
   "require": {
     "php": "^7.1"
   },
+  "require-dev": {
+    "phpunit/phpunit": "^5.7|^6.0"
+  },
   "autoload": {
     "psr-4": {
       "seretos\\testrail\\": "src/"

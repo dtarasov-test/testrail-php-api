@@ -1,5 +1,5 @@
 <?php
-namespace seretos\testrail;
+namespace seretos\testrail\connector;
 
 use Exception;
 
