@@ -23,10 +23,10 @@ class Suites extends AbstractApi
 
     public function findByName(int $projectId, string $name)
     {
-        $allProjects = $this->all($projectId);
-        foreach ($allProjects as $project) {
-            if ($project['name'] === $name) {
-                return $project;
+        $allSuites = $this->all($projectId);
+        foreach ($allSuites as $suite) {
+            if ($suite['name'] === $name) {
+                return $suite;
             }
         }
         return [];
