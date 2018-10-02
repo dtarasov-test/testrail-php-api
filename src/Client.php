@@ -10,6 +10,7 @@ namespace seretos\testrail;
 
 
 use seretos\testrail\api\Cases;
+use seretos\testrail\api\Fields;
 use seretos\testrail\api\Projects;
 use seretos\testrail\api\Sections;
 use seretos\testrail\api\Suites;
@@ -61,6 +62,10 @@ class Client
         return new Types($this->connector);
     }
 
+    public function fields(){
+        return new Fields($this->connector);
+    }
+
     public function api($name){
         switch ($name){
             case 'projects':
@@ -75,6 +80,8 @@ class Client
                 return $this->templates();
             case 'types':
                 return $this->types();
+            case 'fields':
+                return $this->fields();
         }
         return null;
     }

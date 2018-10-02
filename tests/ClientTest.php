@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use seretos\testrail\api\Cases;
+use seretos\testrail\api\Fields;
 use seretos\testrail\api\Projects;
 use seretos\testrail\api\Sections;
 use seretos\testrail\api\Suites;
@@ -117,5 +118,19 @@ class ClientTest extends TestCase
      */
     public function apiTypes(){
         $this->assertInstanceOf(Types::class,$this->client->api('types'));
+    }
+
+    /**
+     * @test
+     */
+    public function fields(){
+        $this->assertInstanceOf(Fields::class,$this->client->fields());
+    }
+
+    /**
+     * @test
+     */
+    public function apiFields(){
+        $this->assertInstanceOf(Fields::class,$this->client->api('fields'));
     }
 }
