@@ -49,13 +49,13 @@ class FieldsTest extends TestCase
         $this->mockApiConnector->expects($this->once())
             ->method('send_get')
             ->with('get_case_fields')
-            ->will($this->returnValue([['id' => 1,'name' => 'field1','config' => ['context' => ['is_global' => false,'project_ids' => [1,2]]]],
-                ['id' => 2,'name' => 'field2','config' => ['context' => ['is_global' => false,'project_ids' => [3,4]]]],
-                ['id' => 3,'name' => 'field3','config' => ['context' => ['is_global' => true,'project_ids' => null]]]
+            ->will($this->returnValue([['id' => 1,'name' => 'field1','configs' => [0 => ['context' => ['is_global' => false,'project_ids' => [1,2]]]]],
+                ['id' => 2,'name' => 'field2','configs' => [0 => ['context' => ['is_global' => false,'project_ids' => [3,4]]]]],
+                ['id' => 3,'name' => 'field3','configs' => [0 => ['context' => ['is_global' => true,'project_ids' => null]]]]
             ]));
 
-        $this->assertSame([['id' => 2,'name' => 'field2','config' => ['context' => ['is_global' => false,'project_ids' => [3,4]]]],
-            ['id' => 3,'name' => 'field3','config' => ['context' => ['is_global' => true,'project_ids' => null]]]],$this->fields->findByProject(3));
+        $this->assertSame([['id' => 2,'name' => 'field2','configs' => [0 => ['context' => ['is_global' => false,'project_ids' => [3,4]]]]],
+            ['id' => 3,'name' => 'field3','configs' => [0 => ['context' => ['is_global' => true,'project_ids' => null]]]]],$this->fields->findByProject(3));
     }
 
     /**
@@ -65,12 +65,12 @@ class FieldsTest extends TestCase
         $this->mockApiConnector->expects($this->once())
             ->method('send_get')
             ->with('get_case_fields')
-            ->will($this->returnValue([['id' => 1,'name' => 'field1','config' => ['context' => ['is_global' => false,'project_ids' => [1,2]]]],
-                ['id' => 2,'name' => 'field2','config' => ['context' => ['is_global' => false,'project_ids' => [3,4]]]],
-                ['id' => 3,'name' => 'field3','config' => ['context' => ['is_global' => true,'project_ids' => null]]]
+            ->will($this->returnValue([['id' => 1,'name' => 'field1','configs' => [0 => ['context' => ['is_global' => false,'project_ids' => [1,2]]]]],
+                ['id' => 2,'name' => 'field2','configs' => [0 => ['context' => ['is_global' => false,'project_ids' => [3,4]]]]],
+                ['id' => 3,'name' => 'field3','configs' => [0 => ['context' => ['is_global' => true,'project_ids' => null]]]]
             ]));
 
-        $this->assertSame(['id' => 3,'name' => 'field3','config' => ['context' => ['is_global' => true,'project_ids' => null]]],$this->fields->findByName('field3'));
+        $this->assertSame(['id' => 3,'name' => 'field3','configs' => [0 => ['context' => ['is_global' => true,'project_ids' => null]]]],$this->fields->findByName('field3'));
     }
 
     /**
@@ -80,9 +80,9 @@ class FieldsTest extends TestCase
         $this->mockApiConnector->expects($this->once())
             ->method('send_get')
             ->with('get_case_fields')
-            ->will($this->returnValue([['id' => 1,'name' => 'field1','configs' => ['options' => ['items' => "1, item1
+            ->will($this->returnValue([['id' => 1,'name' => 'field1','configs' => [0 => ['options' => ['items' => "1, item1
 2, item2
-3, item3"]]]]));
+3, item3"]]]]]));
 
         $this->assertSame(2,$this->fields->findElementId('field1','item2'));
     }

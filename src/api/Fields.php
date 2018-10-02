@@ -20,9 +20,9 @@ class Fields extends AbstractApi
         $fields = $this->all();
         $resultFields = [];
         foreach($fields as $field){
-            if($field['config']['context']['is_global'] === true){
+            if($field['configs'][0]['context']['is_global'] === true){
                 $resultFields[] = $field;
-            }else if(in_array($projectId,$field['config']['context']['project_ids'])){
+            }else if(in_array($projectId,$field['configs'][0]['context']['project_ids'])){
                 $resultFields[] = $field;
             }
         }
@@ -47,7 +47,7 @@ class Fields extends AbstractApi
     public function findElementId(string $field, string $value, int $projectId = null){
         $field = $this->findByName($field,$projectId);
         if($field !== []){
-            preg_match_all('/^([0-9]*),\s([A-Za-z0-9 ]*)/m', $field['configs']['options']['items'], $matches, PREG_SET_ORDER, 0);
+            preg_match_all('/^([0-9]*),\s([A-Za-z0-9 ]*)/m', $field['configs'][0]['options']['items'], $matches, PREG_SET_ORDER, 0);
             foreach ($matches as $match) {
                 if($match[2] === $value){
                     return (int)$match[1];
