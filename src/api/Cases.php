@@ -21,11 +21,10 @@ class Cases extends AbstractApi
         return $this->connector->send_get('get_case/' . $this->encodePath($caseId));
     }
 
-    public function findByTitle(int $projectId, int $suiteId, int $sectionId, string $title)
-    {
+    public function findByField(int $projectId, int $suiteId, int $sectionId, string $field, string $value){
         $allCases = $this->all($projectId,$suiteId, $sectionId);
         foreach ($allCases as $case) {
-            if ($case['title'] === $title) {
+            if ($case[$field] === $value) {
                 return $case;
             }
         }
