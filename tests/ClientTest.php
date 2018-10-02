@@ -3,6 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use seretos\testrail\api\Cases;
 use seretos\testrail\api\Fields;
+use seretos\testrail\api\Priorities;
 use seretos\testrail\api\Projects;
 use seretos\testrail\api\Sections;
 use seretos\testrail\api\Suites;
@@ -132,5 +133,19 @@ class ClientTest extends TestCase
      */
     public function apiFields(){
         $this->assertInstanceOf(Fields::class,$this->client->api('fields'));
+    }
+
+    /**
+     * @test
+     */
+    public function priorities(){
+        $this->assertInstanceOf(Priorities::class,$this->client->priorities());
+    }
+
+    /**
+     * @test
+     */
+    public function apiPriorities(){
+        $this->assertInstanceOf(Priorities::class,$this->client->api('priorities'));
     }
 }

@@ -11,6 +11,7 @@ namespace seretos\testrail;
 
 use seretos\testrail\api\Cases;
 use seretos\testrail\api\Fields;
+use seretos\testrail\api\Priorities;
 use seretos\testrail\api\Projects;
 use seretos\testrail\api\Sections;
 use seretos\testrail\api\Suites;
@@ -66,6 +67,10 @@ class Client
         return new Fields($this->connector);
     }
 
+    public function priorities(){
+        return new Priorities($this->connector);
+    }
+
     public function api($name){
         switch ($name){
             case 'projects':
@@ -82,6 +87,8 @@ class Client
                 return $this->types();
             case 'fields':
                 return $this->fields();
+            case 'priorities':
+                return $this->priorities();
         }
         return null;
     }
