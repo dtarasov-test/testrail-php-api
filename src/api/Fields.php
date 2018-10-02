@@ -37,7 +37,7 @@ class Fields extends AbstractApi
         }
 
         foreach($fields as $field){
-            if($field['name'] === $name){
+            if($field['system_name'] === $name || $field['name'] === $name){
                 return $field;
             }
         }
