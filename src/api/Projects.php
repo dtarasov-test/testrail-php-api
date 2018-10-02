@@ -14,10 +14,14 @@ class Projects extends AbstractApi
     public const SINGLE_SUITE_MODE = 1;
     public const BASELINE_SUITE_MODE = 2;
     public const MULTI_SUITE_MODE = 3;
+    private $cache = null;
 
     public function all()
     {
-        return $this->connector->send_get('get_projects');
+        if($this->cache === null) {
+            $this->cache =  $this->connector->send_get('get_projects');
+        }
+        return $this->cache;
     }
 
     public function get(int $projectId)
@@ -38,11 +42,13 @@ class Projects extends AbstractApi
 
     public function create(string $name, string $announcement = null, bool $show_announcement = false, int $suite_mode = self::MULTI_SUITE_MODE)
     {
-        return $this->connector->send_post('add_project',
+        $project = $this->connector->send_post('add_project',
             ['name' => $name,
                 'announcement' => $announcement,
                 'show_announcement' => $show_announcement,
                 'suite_mode' => $suite_mode]);
+        $this->cache = null;
+        return $project;
     }
 
     /**
@@ -56,10 +62,13 @@ class Projects extends AbstractApi
      * }
      */
     public function update(int $projectId, array $parameters = []){
-        return $this->connector->send_post('update_project/'.$this->encodePath($projectId),$parameters);
+        $project = $this->connector->send_post('update_project/'.$this->encodePath($projectId),$parameters);
+        $this->cache = null;
+        return $project;
     }
 
     public function delete(int $projectId){
         $this->connector->send_post('delete_project/'.$this->encodePath($projectId),[]);
+        $this->cache = null;
     }
 }

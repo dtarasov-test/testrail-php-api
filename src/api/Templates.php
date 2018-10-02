@@ -11,9 +11,13 @@ namespace seretos\testrail\api;
 
 class Templates extends AbstractApi
 {
+    private $cache = null;
     public function all(int $projectId)
     {
-        return $this->connector->send_get('get_templates/'.$this->encodePath($projectId));
+        if($this->cache === null) {
+            $this->cache = $this->connector->send_get('get_templates/' . $this->encodePath($projectId));
+        }
+        return $this->cache;
     }
 
     public function findByName(int $projectId, string $name)

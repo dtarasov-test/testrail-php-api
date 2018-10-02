@@ -11,9 +11,14 @@ namespace seretos\testrail\api;
 
 class Cases extends AbstractApi
 {
+    private $cache = null;
+
     public function all(int $projectId, int $suiteId, int $sectionId)
     {
-        return $this->connector->send_get('get_cases/'.$this->encodePath($projectId).'&suite_id='.$this->encodePath($suiteId).'&section_id='.$this->encodePath($sectionId));
+        if($this->cache === null) {
+            $this->cache = $this->connector->send_get('get_cases/' . $this->encodePath($projectId) . '&suite_id=' . $this->encodePath($suiteId) . '&section_id=' . $this->encodePath($sectionId));
+        }
+        return $this->cache;
     }
 
     public function get(int $caseId)
@@ -45,7 +50,9 @@ class Cases extends AbstractApi
         $params['title'] = $title;
         $params['template_id'] = $templateId;
         $params['type_id'] = $typeId;
-        return $this->connector->send_post('add_case/'.$this->encodePath($sectionId), $params);
+        $case = $this->connector->send_post('add_case/'.$this->encodePath($sectionId), $params);
+        $this->cache = null;
+        return $case;
     }
 
     /**
@@ -58,10 +65,13 @@ class Cases extends AbstractApi
      * @return mixed
      */
     public function update(int $caseId, array $parameters = []){
-        return $this->connector->send_post('update_case/'.$this->encodePath($caseId),$parameters);
+        $case = $this->connector->send_post('update_case/'.$this->encodePath($caseId),$parameters);
+        $this->cache = null;
+        return $case;
     }
 
     public function delete(int $caseId){
         $this->connector->send_post('delete_case/'.$this->encodePath($caseId),[]);
+        $this->cache = null;
     }
 }

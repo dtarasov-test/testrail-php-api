@@ -11,9 +11,13 @@ namespace seretos\testrail\api;
 
 class Priorities extends AbstractApi
 {
+    private $cache = null;
     public function all()
     {
-        return $this->connector->send_get('get_priorities');
+        if($this->cache === null) {
+            $this->cache = $this->connector->send_get('get_priorities');
+        }
+        return $this->cache;
     }
 
     public function findByName(string $name)

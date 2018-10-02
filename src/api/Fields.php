@@ -11,9 +11,13 @@ namespace seretos\testrail\api;
 
 class Fields extends AbstractApi
 {
+    private $cache = null;
     public function all()
     {
-        return $this->connector->send_get('get_case_fields');
+        if($this->cache === null) {
+            $this->cache = $this->connector->send_get('get_case_fields');
+        }
+        return $this->cache;
     }
 
     public function findByProject(int $projectId){
