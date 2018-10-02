@@ -72,4 +72,18 @@ class FieldsTest extends TestCase
 
         $this->assertSame(['id' => 3,'name' => 'field3','config' => ['context' => ['is_global' => true,'project_ids' => null]]],$this->fields->findByName('field3'));
     }
+
+    /**
+     * @test
+     */
+    public function findElementId(){
+        $this->mockApiConnector->expects($this->once())
+            ->method('send_get')
+            ->with('get_case_fields')
+            ->will($this->returnValue([['id' => 1,'name' => 'field1','configs' => ['options' => ['items' => "1, item1
+2, item2
+3, item3"]]]]));
+
+        $this->assertSame(2,$this->fields->findElementId('field1','item2'));
+    }
 }
