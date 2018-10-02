@@ -53,4 +53,15 @@ class PrioritiesTest extends TestCase
 
         $this->assertSame(['id' => 1,'name' => 'prio1'],$this->priorities->findByName('prio1'));
     }
+
+    /**
+     * @test
+     */
+    public function getDefaultPriority(){
+        $this->mockApiConnector->expects($this->once())
+            ->method('send_get')
+            ->with('get_priorities')
+            ->will($this->returnValue([['id' => 1,'name' => 'prio1','is_default' => false],['id' => 2,'name' => 'prio2','is_default' => true]]));
+        $this->assertSame(['id' => 2,'name' => 'prio2','is_default' => true],$this->priorities->getDefaultPriority());
+    }
 }

@@ -26,4 +26,14 @@ class Priorities extends AbstractApi
         }
         return [];
     }
+
+    public function getDefaultPriority(){
+        $priorities = $this->all();
+        foreach ($priorities as $priority) {
+            if ($priority['is_default'] === true) {
+                return $priority;
+            }
+        }
+        return [];
+    }
 }
