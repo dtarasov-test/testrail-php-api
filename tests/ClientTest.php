@@ -2,7 +2,10 @@
 
 use PHPUnit\Framework\TestCase;
 use seretos\testrail\api\Cases;
+use seretos\testrail\api\Configurations;
 use seretos\testrail\api\Fields;
+use seretos\testrail\api\Milestones;
+use seretos\testrail\api\Plans;
 use seretos\testrail\api\Priorities;
 use seretos\testrail\api\Projects;
 use seretos\testrail\api\Sections;
@@ -147,5 +150,47 @@ class ClientTest extends TestCase
      */
     public function apiPriorities(){
         $this->assertInstanceOf(Priorities::class,$this->client->api('priorities'));
+    }
+
+    /**
+     * @test
+     */
+    public function milestones(){
+        $this->assertInstanceOf(Milestones::class,$this->client->milestones());
+    }
+
+    /**
+     * @test
+     */
+    public function apiMilestones(){
+        $this->assertInstanceOf(Milestones::class,$this->client->api('milestones'));
+    }
+
+    /**
+     * @test
+     */
+    public function plans(){
+        $this->assertInstanceOf(Plans::class,$this->client->plans());
+    }
+
+    /**
+     * @test
+     */
+    public function apiPlans(){
+        $this->assertInstanceOf(Plans::class,$this->client->api('plans'));
+    }
+
+    /**
+     * @test
+     */
+    public function configurations(){
+        $this->assertInstanceOf(Configurations::class,$this->client->configurations());
+    }
+
+    /**
+     * @test
+     */
+    public function apiConfigurations(){
+        $this->assertInstanceOf(Configurations::class,$this->client->api('configurations'));
     }
 }

@@ -10,7 +10,10 @@ namespace seretos\testrail;
 
 
 use seretos\testrail\api\Cases;
+use seretos\testrail\api\Configurations;
 use seretos\testrail\api\Fields;
+use seretos\testrail\api\Milestones;
+use seretos\testrail\api\Plans;
 use seretos\testrail\api\Priorities;
 use seretos\testrail\api\Projects;
 use seretos\testrail\api\Sections;
@@ -71,6 +74,18 @@ class Client
         return new Priorities($this->connector);
     }
 
+    public function milestones(){
+        return new Milestones($this->connector);
+    }
+
+    public function plans(){
+        return new Plans($this->connector);
+    }
+
+    public function configurations(){
+        return new Configurations($this->connector);
+    }
+
     public function api($name){
         switch ($name){
             case 'projects':
@@ -89,6 +104,12 @@ class Client
                 return $this->fields();
             case 'priorities':
                 return $this->priorities();
+            case 'milestones':
+                return $this->milestones();
+            case 'plans':
+                return $this->plans();
+            case 'configurations':
+                return $this->configurations();
         }
         return null;
     }
