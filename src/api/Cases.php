@@ -13,7 +13,7 @@ class Cases extends AbstractApi
 {
     private $cache = null;
 
-    public function all(int $projectId, int $suiteId, int $sectionId)
+    public function all(int $projectId, int $suiteId, int $sectionId = null)
     {
         if($this->cache === null) {
             $this->cache = $this->connector->send_get('get_cases/' . $this->encodePath($projectId) . '&suite_id=' . $this->encodePath($suiteId) . '&section_id=' . $this->encodePath($sectionId));
