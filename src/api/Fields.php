@@ -60,4 +60,17 @@ class Fields extends AbstractApi
         }
         return 0;
     }
+
+    public function findElementNameById(string $field, int $id, int $projectId = null){
+        $field = $this->findByName($field,$projectId);
+        if($field !== []){
+            preg_match_all('/^([0-9]*),\s([A-Za-z0-9 ]*)/m', $field['configs'][0]['options']['items'], $matches, PREG_SET_ORDER, 0);
+            foreach ($matches as $match) {
+                if((int)$match[1] === $id){
+                    return $match[2];
+                }
+            }
+        }
+        return 0;
+    }
 }
