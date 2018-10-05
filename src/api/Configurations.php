@@ -66,9 +66,10 @@ class Configurations extends AbstractApi
 
     public function create(int $groupId, string $name)
     {
-        $this->connector->send_post('add_config/'.$this->encodePath($groupId),
+        $config = $this->connector->send_post('add_config/'.$this->encodePath($groupId),
             ['name' => $name]);
         $this->cache = null;
+        return $config;
     }
 
     public function update(int $configId, string $name){

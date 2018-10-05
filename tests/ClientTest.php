@@ -8,6 +8,7 @@ use seretos\testrail\api\Milestones;
 use seretos\testrail\api\Plans;
 use seretos\testrail\api\Priorities;
 use seretos\testrail\api\Projects;
+use seretos\testrail\api\Results;
 use seretos\testrail\api\Sections;
 use seretos\testrail\api\Suites;
 use seretos\testrail\api\Templates;
@@ -192,5 +193,19 @@ class ClientTest extends TestCase
      */
     public function apiConfigurations(){
         $this->assertInstanceOf(Configurations::class,$this->client->api('configurations'));
+    }
+
+    /**
+     * @test
+     */
+    public function results(){
+        $this->assertInstanceOf(Results::class,$this->client->results());
+    }
+
+    /**
+     * @test
+     */
+    public function apiResults(){
+        $this->assertInstanceOf(Results::class,$this->client->api('results'));
     }
 }
