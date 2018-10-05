@@ -19,7 +19,7 @@ class Projects extends AbstractApi
     public function all()
     {
         if($this->cache === null) {
-            $this->cache =  $this->connector->send_get('get_projects');
+            $this->cache = $this->connector->send_get('get_projects');
         }
         return $this->cache;
     }

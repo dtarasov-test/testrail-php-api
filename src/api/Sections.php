@@ -11,13 +11,13 @@ namespace seretos\testrail\api;
 
 class Sections extends AbstractApi
 {
-    private $cache = null;
+    private $cache = [];
     public function all(int $projectId, int $suiteId)
     {
-        if($this->cache === null) {
-            $this->cache = $this->connector->send_get('get_sections/' . $this->encodePath($projectId) . '&suite_id=' . $this->encodePath($suiteId));
+        if(!isset($this->cache[$projectId][$suiteId])) {
+            $this->cache[$projectId][$suiteId] = $this->connector->send_get('get_sections/' . $this->encodePath($projectId) . '&suite_id=' . $this->encodePath($suiteId));
         }
-        return $this->cache;
+        return $this->cache[$projectId][$suiteId];
     }
 
     public function get(int $sectionId)
@@ -54,7 +54,7 @@ class Sections extends AbstractApi
                 'description' => $description,
                 'suite_id' => $suiteId,
                 'parent_id' => $parent_id]);
-        $this->cache = null;
+        unset($this->cache[$projectId][$suiteId]);
         return $section;
     }
 
@@ -68,12 +68,12 @@ class Sections extends AbstractApi
      */
     public function update(int $sectionId, array $parameters = []){
         $section = $this->connector->send_post('update_section/'.$this->encodePath($sectionId),$parameters);
-        $this->cache = null;
+        $this->cache = [];
         return $section;
     }
 
     public function delete(int $sectionId){
         $this->connector->send_post('delete_section/'.$this->encodePath($sectionId),[]);
-        $this->cache = null;
+        $this->cache = [];
     }
 }

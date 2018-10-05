@@ -11,14 +11,13 @@ namespace seretos\testrail\api;
 
 class Configurations extends AbstractApi
 {
-    private $cache = null;
-
+    private $cache = [];
     public function all(int $projectId)
     {
-        if($this->cache === null) {
-            $this->cache = $this->connector->send_get('get_configs/'.$this->encodePath($projectId));
+        if(!isset($this->cache[$projectId])) {
+            $this->cache[$projectId] = $this->connector->send_get('get_configs/' . $this->encodePath($projectId));
         }
-        return $this->cache;
+        return $this->cache[$projectId];
     }
 
     public function findByGroupName(int $projectId, string $name){
@@ -49,37 +48,37 @@ class Configurations extends AbstractApi
     {
         $group = $this->connector->send_post('add_config_group/'.$this->encodePath($projectId),
             ['name' => $name]);
-        $this->cache = null;
+        unset($this->cache[$projectId]);
         return $group;
     }
 
     public function updateGroup(int $groupId, string $name){
         $group = $this->connector->send_post('update_config_group/'.$this->encodePath($groupId),['name' => $name]);
-        $this->cache = null;
+        $this->cache = [];
         return $group;
     }
 
     public function deleteGroup(int $groupId){
         $this->connector->send_post('delete_config_group/'.$this->encodePath($groupId),[]);
-        $this->cache = null;
+        $this->cache = [];
     }
 
     public function create(int $groupId, string $name)
     {
         $config = $this->connector->send_post('add_config/'.$this->encodePath($groupId),
             ['name' => $name]);
-        $this->cache = null;
+        $this->cache = [];
         return $config;
     }
 
     public function update(int $configId, string $name){
         $this->connector->send_post('update_config/'.$this->encodePath($configId),
             ['name' => $name]);
-        $this->cache = null;
+        $this->cache = [];
     }
 
     public function delete(int $configId){
         $this->connector->send_post('delete_config/'.$this->encodePath($configId),[]);
-        $this->cache = null;
+        $this->cache = [];
     }
 }

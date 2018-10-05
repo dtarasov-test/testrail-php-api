@@ -11,14 +11,13 @@ namespace seretos\testrail\api;
 
 class Milestones extends AbstractApi
 {
-    private $cache = null;
-
+    private $cache = [];
     public function all(int $projectId)
     {
-        if($this->cache === null) {
-            $this->cache = $this->connector->send_get('get_milestones/'.$this->encodePath($projectId));
+        if(!isset($this->cache[$projectId])) {
+            $this->cache[$projectId] = $this->connector->send_get('get_milestones/' . $this->encodePath($projectId));
         }
-        return $this->cache;
+        return $this->cache[$projectId];
     }
 
     public function get(int $milestoneId)
@@ -46,7 +45,7 @@ class Milestones extends AbstractApi
             ['name' => $name,
                 'description' => $description,
                 'due_on' => $dueOn->getTimestamp()]);
-        $this->cache = null;
+        unset($this->cache[$projectId]);
         return $milestone;
     }
 
@@ -56,17 +55,17 @@ class Milestones extends AbstractApi
      *      @var bool       $is_completed
      *      @var bool       $is_started
      *      @var int        $parent_id
-     *      @var timestamp  $start_on
+     *      @var int        $start_on
      * }
      */
     public function update(int $milestoneId, array $parameters = []){
         $milestone = $this->connector->send_post('update_milestone/'.$this->encodePath($milestoneId),$parameters);
-        $this->cache = null;
+        $this->cache = [];
         return $milestone;
     }
 
     public function delete(int $milestoneId){
         $this->connector->send_post('delete_milestone/'.$this->encodePath($milestoneId),[]);
-        $this->cache = null;
+        $this->cache = [];
     }
 }

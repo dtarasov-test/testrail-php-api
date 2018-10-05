@@ -12,7 +12,6 @@ namespace seretos\testrail\api;
 class Statuses extends AbstractApi
 {
     private $cache = null;
-
     public function all()
     {
         if($this->cache === null) {

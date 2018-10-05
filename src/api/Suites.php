@@ -11,14 +11,13 @@ namespace seretos\testrail\api;
 
 class Suites extends AbstractApi
 {
-    private $cache = null;
-
+    private $cache = [];
     public function all(int $projectId)
     {
-        if($this->cache === null) {
-            $this->cache = $this->connector->send_get('get_suites/' . $this->encodePath($projectId));
+        if(!isset($this->cache[$projectId])) {
+            $this->cache[$projectId] = $this->connector->send_get('get_suites/' . $this->encodePath($projectId));
         }
-        return $this->cache;
+        return $this->cache[$projectId];
     }
 
     public function get(int $suiteId)
@@ -42,7 +41,7 @@ class Suites extends AbstractApi
         $suite =  $this->connector->send_post('add_suite/'.$this->encodePath($projectId),
             ['name' => $name,
                 'description' => $description]);
-        $this->cache = null;
+        unset($this->cache[$projectId]);
         return $suite;
     }
 
@@ -56,12 +55,12 @@ class Suites extends AbstractApi
      */
     public function update(int $suiteId, array $parameters = []){
         $suite =  $this->connector->send_post('update_suite/'.$this->encodePath($suiteId),$parameters);
-        $this->cache = null;
+        $this->cache = [];
         return $suite;
     }
 
     public function delete(int $suiteId){
         $this->connector->send_post('delete_suite/'.$this->encodePath($suiteId),[]);
-        $this->cache = null;
+        $this->cache = [];
     }
 }
