@@ -18,6 +18,7 @@ use seretos\testrail\api\Priorities;
 use seretos\testrail\api\Projects;
 use seretos\testrail\api\Results;
 use seretos\testrail\api\Sections;
+use seretos\testrail\api\Statuses;
 use seretos\testrail\api\Suites;
 use seretos\testrail\api\Templates;
 use seretos\testrail\api\Types;
@@ -91,6 +92,10 @@ class Client
         return new Results($this->connector);
     }
 
+    public function statuses(){
+        return new Statuses($this->connector);
+    }
+
     public function api($name){
         switch ($name){
             case 'projects':
@@ -117,6 +122,8 @@ class Client
                 return $this->configurations();
             case 'results':
                 return $this->results();
+            case 'statuses':
+                return $this->statuses();
         }
         return null;
     }

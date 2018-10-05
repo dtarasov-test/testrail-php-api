@@ -33,7 +33,12 @@ class ResultsTest extends TestCase
     /**
      * @test
      */
-    public function test(){
-        $this->assertSame('tst','tst');
+    public function create(){
+        $this->mockApiConnector->expects($this->once())
+            ->method('send_post')
+            ->with('add_result_for_case/1/2',['status_id' => 3])
+            ->will($this->returnValue(['id' => 1,'name' => 'result1']));
+
+        $this->assertSame(['id' => 1,'name' => 'result1'],$this->results->create(1,2,3));
     }
 }

@@ -10,6 +10,7 @@ use seretos\testrail\api\Priorities;
 use seretos\testrail\api\Projects;
 use seretos\testrail\api\Results;
 use seretos\testrail\api\Sections;
+use seretos\testrail\api\Statuses;
 use seretos\testrail\api\Suites;
 use seretos\testrail\api\Templates;
 use seretos\testrail\api\Types;
@@ -207,5 +208,19 @@ class ClientTest extends TestCase
      */
     public function apiResults(){
         $this->assertInstanceOf(Results::class,$this->client->api('results'));
+    }
+
+    /**
+     * @test
+     */
+    public function statuses(){
+        $this->assertInstanceOf(Statuses::class,$this->client->statuses());
+    }
+
+    /**
+     * @test
+     */
+    public function apiStatuses(){
+        $this->assertInstanceOf(Statuses::class,$this->client->api('statuses'));
     }
 }
