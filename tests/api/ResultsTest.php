@@ -29,4 +29,11 @@ class ResultsTest extends TestCase
 
         $this->results = new Results($this->mockApiConnector);
     }
+
+    /**
+     * @test
+     */
+    public function test(){
+        $this->assertSame('tst','tst');
+    }
 }
