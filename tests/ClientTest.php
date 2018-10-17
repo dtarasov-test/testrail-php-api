@@ -14,6 +14,7 @@ use seretos\testrail\api\Statuses;
 use seretos\testrail\api\Suites;
 use seretos\testrail\api\Templates;
 use seretos\testrail\api\Types;
+use seretos\testrail\api\Users;
 use seretos\testrail\Client;
 use seretos\testrail\connector\ApiConnectorInterface;
 
@@ -222,5 +223,19 @@ class ClientTest extends TestCase
      */
     public function apiStatuses(){
         $this->assertInstanceOf(Statuses::class,$this->client->api('statuses'));
+    }
+
+    /**
+     * @test
+     */
+    public function users(){
+        $this->assertInstanceOf(Users::class,$this->client->users());
+    }
+
+    /**
+     * @test
+     */
+    public function apiUsers(){
+        $this->assertInstanceOf(Users::class,$this->client->api('users'));
     }
 }
