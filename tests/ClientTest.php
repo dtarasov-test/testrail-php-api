@@ -46,6 +46,15 @@ class ClientTest extends TestCase
     /**
      * @test
      */
+    public function getUser(){
+        $this->mockConnector->expects($this->once())->method('get_user')->will($this->returnValue('testUser'));
+
+        $this->assertSame('testUser',$this->client->getUser());
+    }
+
+    /**
+     * @test
+     */
     public function projects(){
         $this->assertInstanceOf(Projects::class,$this->client->projects());
     }

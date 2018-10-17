@@ -45,6 +45,13 @@ class Client
         return new self($connector);
     }
 
+    /**
+     * @return string
+     */
+    public function getUser(){
+        return $this->connector->get_user();
+    }
+
     public function projects(){
         return new Projects($this->connector);
     }
