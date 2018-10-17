@@ -84,7 +84,7 @@ class PlansTest extends TestCase
      */
     public function createEntry(){
         $this->mockApiConnector->expects($this->once())->method('send_post')
-            ->with('add_plan_entry/1',['suite_id' => 1, 'name' => 'test', 'description' => null, 'include_all' => true,'case_ids' => [],'config_ids' => [],'runs' => []])
+            ->with('add_plan_entry/1',['suite_id' => 1, 'name' => 'test', 'description' => null, 'include_all' => true,'case_ids' => [],'config_ids' => [],'runs' => [],'assignedto_id' => null])
             ->will($this->returnValue(['id' => 1,'name' => 'myPlanEntry']));
 
         $this->assertSame(['id' => 1,'name' => 'myPlanEntry'],$this->plans->createEntry(1,1,'test'));

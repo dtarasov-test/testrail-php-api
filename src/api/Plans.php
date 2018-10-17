@@ -46,9 +46,9 @@ class Plans extends AbstractApi
         return $plan;
     }
 
-    public function createEntry(int $planId, int $suiteId, string $name, array $configIds = [], array $runs = [], string $description = null, bool $all = true, array $cases = []){
+    public function createEntry(int $planId, int $suiteId, string $name, array $configIds = [], array $runs = [], string $description = null, bool $all = true, array $cases = [], int $assignedTo = null){
         $entry = $this->connector->send_post('add_plan_entry/'.$this->encodePath($planId),
-            ['suite_id' => $suiteId,'name' => $name, 'description' => $description, 'include_all' => $all, 'case_ids' => $cases, 'config_ids' => $configIds, 'runs' => $runs]);
+            ['suite_id' => $suiteId,'name' => $name, 'description' => $description, 'include_all' => $all, 'case_ids' => $cases, 'config_ids' => $configIds, 'runs' => $runs,'assignedto_id' => $assignedTo]);
         $this->cache = [];
         return $entry;
     }
