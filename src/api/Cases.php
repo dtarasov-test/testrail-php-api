@@ -16,6 +16,17 @@ class Cases extends AbstractApi
         return $this->connector->send_get('get_cases/' . $this->encodePath($projectId) . '&suite_id=' . $this->encodePath($suiteId) . '&section_id=' . $this->encodePath($sectionId));
     }
 
+    public function findBySection(int $projectId, int $suiteId, int $sectionId = null){
+        $cases = $this->all($projectId,$suiteId,$sectionId);
+        $resultCases = [];
+        foreach ($cases as $case) {
+            if($case['section_id'] === $sectionId){
+                $resultCases[] = $case;
+            }
+        }
+        return $resultCases;
+    }
+
     public function get(int $caseId)
     {
         return $this->connector->send_get('get_case/' . $this->encodePath($caseId));

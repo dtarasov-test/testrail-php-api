@@ -45,6 +45,24 @@ class CasesTest extends TestCase
     /**
      * @test
      */
+    public function findBySection(){
+        $this->mockApiConnector->expects($this->at(0))
+            ->method('send_get')
+            ->with('get_cases/1&suite_id=2&section_id=3')
+            ->will($this->returnValue([['id' => 1,'name' => 'case1','section_id' => null],['id' => 2,'name' => 'case2','section_id' => null],['id' => 3,'name' => 'case2','section_id' => 3]]));
+
+        $this->mockApiConnector->expects($this->at(1))
+            ->method('send_get')
+            ->with('get_cases/1&suite_id=2&section_id=')
+            ->will($this->returnValue([['id' => 1,'name' => 'case1','section_id' => null],['id' => 2,'name' => 'case2','section_id' => null],['id' => 3,'name' => 'case2','section_id' => 3]]));
+
+        $this->assertSame([['id' => 3,'name' => 'case2','section_id' => 3]],$this->cases->findBySection(1,2,3));
+        $this->assertSame([['id' => 1,'name' => 'case1','section_id' => null],['id' => 2,'name' => 'case2','section_id' => null]],$this->cases->findBySection(1,2));
+    }
+
+    /**
+     * @test
+     */
     public function findByTitle(){
         $this->mockApiConnector->expects($this->once())
             ->method('send_get')
