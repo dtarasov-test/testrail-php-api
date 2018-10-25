@@ -47,6 +47,17 @@ class Sections extends AbstractApi
         return [];
     }
 
+    public function findByParent(int $projectId, int $suiteId, int $parentId = null){
+        $allSections = $this->all($projectId,$suiteId);
+        $sections = [];
+        foreach ($allSections as $section) {
+            if ((!isset($section['parent_id']) && $parentId == null) || (isset($section['parent_id']) && $section['parent_id'] == $parentId)) {
+                $sections[] = $section;
+            }
+        }
+        return $sections;
+    }
+
     public function create(int $projectId, int $suiteId, string $name, string $description = null, int $parent_id = null)
     {
         $section = $this->connector->send_post('add_section/'.$this->encodePath($projectId),

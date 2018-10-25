@@ -69,6 +69,19 @@ class SectionsTest extends TestCase
     /**
      * @test
      */
+    public function findByParent(){
+        $this->mockApiConnector->expects($this->any())
+            ->method('send_get')
+            ->with('get_sections/1&suite_id=2')
+            ->will($this->returnValue([['id' => 1,'name' => 'section1'],['id' => 2,'name' => 'section2','parent_id' => null],['id' => 3,'name' => 'section3','parent_id' => 1],['id' => 4,'name' => 'section4','parent_id' => 1]]));
+
+        $this->assertSame([['id' => 3,'name' => 'section3','parent_id' => 1],['id' => 4,'name' => 'section4','parent_id' => 1]],$this->sections->findByParent(1,2,1));
+        $this->assertSame([['id' => 1,'name' => 'section1'],['id' => 2,'name' => 'section2','parent_id' => null]],$this->sections->findByParent(1,2));
+    }
+
+    /**
+     * @test
+     */
     public function get(){
         $this->mockApiConnector->expects($this->once())
             ->method('send_get')
