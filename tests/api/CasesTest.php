@@ -69,7 +69,7 @@ class CasesTest extends TestCase
             ->with('get_cases/1&suite_id=2&section_id=3')
             ->will($this->returnValue([['id' => 1,'title' => 'case1'],['id' => 2,'title' => 'case2']]));
 
-        $this->assertSame(['id' => 2,'title' => 'case2'],$this->cases->findByField(1,2,3,'title','case2'));
+        $this->assertSame(['id' => 2,'title' => 'case2'],$this->cases->findByField(1,2,'title','case2',3));
     }
 
     /**
