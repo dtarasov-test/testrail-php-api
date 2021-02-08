@@ -1,12 +1,14 @@
 language: php
 php:
-- 7.1
-- 7.2
+- 7.3
+- 7.4
+- 8.0
 
 matrix:
   includes:
-  - php: 7.1
-  - php: 7.2
+  - php: 7.3
+  - php: 7.4
+  - php: 8.0
 script:
 - composer install --no-dev
 - composer dump-autoload --optimize --no-dev --classmap-authoritative

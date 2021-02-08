@@ -23,7 +23,7 @@ class UsersTest extends TestCase
      */
     private $mockApiConnector;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->mockApiConnector = $this->getMockBuilder(ApiConnectorInterface::class)->disableOriginalConstructor()->getMock();
