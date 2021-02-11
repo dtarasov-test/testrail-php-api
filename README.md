@@ -1,8 +1,5 @@
 # testrail-php-api
 
-TestRail API binding for PHP (API v2, available since TestRail 3.0)
+This is fork of [seretos/testrail-php-api](https://github.com/Seretos/testrail-php-api) which provides PHP SDK for TestRail API v2.
 
-Learn more:
-
-http://docs.gurock.com/testrail-api2/start
-http://docs.gurock.com/testrail-api2/accessing
+The reason of forking is to add support of PHP 8.

@@ -1,5 +1,5 @@
 {
-  "name": "seretos/testrail-php-api",
+  "name": "theravel/testrail-php-api",
   "description": "testrail api for packagist with php namespace",
   "keywords": [
     "testrail",
