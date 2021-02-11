@@ -20,8 +20,8 @@ class TestRailAPIClient implements ApiConnectorInterface
 
     public function __construct($base_url)
     {
-        $base_url = trim($base_url, '/') . '/';
-        $this->_url = $base_url . 'index.php?/api/v2/';
+        $base_url = trim($base_url, '/').'/';
+        $this->_url = $base_url.'index.php?/api/v2/';
     }
 
     /**
@@ -108,7 +108,7 @@ class TestRailAPIClient implements ApiConnectorInterface
     protected function _send_request($method, $uri, $data)
     {
         $ch = $this->_create_handle();
-        curl_setopt($ch, CURLOPT_URL, $this->_url . $uri);
+        curl_setopt($ch, CURLOPT_URL, $this->_url.$uri);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         if ($method == 'POST')
@@ -116,16 +116,14 @@ class TestRailAPIClient implements ApiConnectorInterface
             if (is_array($data))
             {
                 $data_str = json_encode($data);
-            }
-            else
+            } else
             {
                 $data_str = '';
             }
 
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data_str);
-        }
-        else
+        } else
         {
             curl_setopt($ch, CURLOPT_POST, false);
         }
@@ -149,8 +147,7 @@ class TestRailAPIClient implements ApiConnectorInterface
         if ($response)
         {
             $result = json_decode($response, true); // As array
-        }
-        else
+        } else
         {
             $result = array();
         }
@@ -163,8 +160,7 @@ class TestRailAPIClient implements ApiConnectorInterface
                     'TestRail API returned HTTP %s (%s)',
                     $info['http_code'],
                     isset($result['error']) ?
-                        '"' . $result['error'] . '"' :
-                        'No additional error message received'
+                        '"'.$result['error'].'"' : 'No additional error message received'
                 )
             );
         }

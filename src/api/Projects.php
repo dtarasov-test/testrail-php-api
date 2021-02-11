@@ -18,7 +18,7 @@ class Projects extends AbstractApi
 
     public function all()
     {
-        if($this->cache === null) {
+        if ($this->cache === null) {
             $this->cache = $this->connector->send_get('get_projects');
         }
         return $this->cache;
@@ -26,7 +26,7 @@ class Projects extends AbstractApi
 
     public function get(int $projectId)
     {
-        return $this->connector->send_get('get_project/' . $this->encodePath($projectId));
+        return $this->connector->send_get('get_project/'.$this->encodePath($projectId));
     }
 
     public function findByName(string $name)
@@ -61,14 +61,14 @@ class Projects extends AbstractApi
      *      @var bool       $is_completed
      * }
      */
-    public function update(int $projectId, array $parameters = []){
-        $project = $this->connector->send_post('update_project/'.$this->encodePath($projectId),$parameters);
+    public function update(int $projectId, array $parameters = []) {
+        $project = $this->connector->send_post('update_project/'.$this->encodePath($projectId), $parameters);
         $this->cache = null;
         return $project;
     }
 
-    public function delete(int $projectId){
-        $this->connector->send_post('delete_project/'.$this->encodePath($projectId),[]);
+    public function delete(int $projectId) {
+        $this->connector->send_post('delete_project/'.$this->encodePath($projectId), []);
         $this->cache = null;
     }
 }

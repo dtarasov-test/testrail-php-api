@@ -13,14 +13,14 @@ class Cases extends AbstractApi
 {
     public function all(int $projectId, int $suiteId, int $sectionId = null)
     {
-        return $this->connector->send_get('get_cases/' . $this->encodePath($projectId) . '&suite_id=' . $this->encodePath($suiteId) . '&section_id=' . $this->encodePath($sectionId));
+        return $this->connector->send_get('get_cases/'.$this->encodePath($projectId).'&suite_id='.$this->encodePath($suiteId).'&section_id='.$this->encodePath($sectionId));
     }
 
-    public function findBySection(int $projectId, int $suiteId, int $sectionId = null){
-        $cases = $this->all($projectId,$suiteId,$sectionId);
+    public function findBySection(int $projectId, int $suiteId, int $sectionId = null) {
+        $cases = $this->all($projectId, $suiteId, $sectionId);
         $resultCases = [];
         foreach ($cases as $case) {
-            if($case['section_id'] === $sectionId){
+            if ($case['section_id'] === $sectionId) {
                 $resultCases[] = $case;
             }
         }
@@ -29,11 +29,11 @@ class Cases extends AbstractApi
 
     public function get(int $caseId)
     {
-        return $this->connector->send_get('get_case/' . $this->encodePath($caseId));
+        return $this->connector->send_get('get_case/'.$this->encodePath($caseId));
     }
 
-    public function findByField(int $projectId, int $suiteId, string $field, string $value,int $sectionId = null){
-        $allCases = $this->all($projectId,$suiteId, $sectionId);
+    public function findByField(int $projectId, int $suiteId, string $field, string $value, int $sectionId = null) {
+        $allCases = $this->all($projectId, $suiteId, $sectionId);
         foreach ($allCases as $case) {
             if ($case[$field] === $value) {
                 return $case;
@@ -69,12 +69,12 @@ class Cases extends AbstractApi
      * }
      * @return mixed
      */
-    public function update(int $caseId, array $parameters = []){
-        $case = $this->connector->send_post('update_case/'.$this->encodePath($caseId),$parameters);
+    public function update(int $caseId, array $parameters = []) {
+        $case = $this->connector->send_post('update_case/'.$this->encodePath($caseId), $parameters);
         return $case;
     }
 
-    public function delete(int $caseId){
-        $this->connector->send_post('delete_case/'.$this->encodePath($caseId),[]);
+    public function delete(int $caseId) {
+        $this->connector->send_post('delete_case/'.$this->encodePath($caseId), []);
     }
 }

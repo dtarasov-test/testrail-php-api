@@ -14,7 +14,7 @@ class Statuses extends AbstractApi
     private $cache = null;
     public function all()
     {
-        if($this->cache === null) {
+        if ($this->cache === null) {
             $this->cache = $this->connector->send_get('get_statuses');
         }
         return $this->cache;

@@ -14,7 +14,7 @@ class Priorities extends AbstractApi
     private $cache = null;
     public function all()
     {
-        if($this->cache === null) {
+        if ($this->cache === null) {
             $this->cache = $this->connector->send_get('get_priorities');
         }
         return $this->cache;
@@ -31,7 +31,7 @@ class Priorities extends AbstractApi
         return [];
     }
 
-    public function getDefaultPriority(){
+    public function getDefaultPriority() {
         $priorities = $this->all();
         foreach ($priorities as $priority) {
             if ($priority['is_default'] === true) {
