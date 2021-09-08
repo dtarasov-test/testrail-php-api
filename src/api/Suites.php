@@ -14,15 +14,15 @@ class Suites extends AbstractApi
     private $cache = [];
     public function all(int $projectId)
     {
-        if(!isset($this->cache[$projectId])) {
-            $this->cache[$projectId] = $this->connector->send_get('get_suites/' . $this->encodePath($projectId));
+        if (!isset($this->cache[$projectId])) {
+            $this->cache[$projectId] = $this->connector->send_get('get_suites/'.$this->encodePath($projectId));
         }
         return $this->cache[$projectId];
     }
 
     public function get(int $suiteId)
     {
-        return $this->connector->send_get('get_suite/' . $this->encodePath($suiteId));
+        return $this->connector->send_get('get_suite/'.$this->encodePath($suiteId));
     }
 
     public function findByName(int $projectId, string $name)
@@ -38,7 +38,7 @@ class Suites extends AbstractApi
 
     public function create(int $projectId, string $name, string $description = null)
     {
-        $suite =  $this->connector->send_post('add_suite/'.$this->encodePath($projectId),
+        $suite = $this->connector->send_post('add_suite/'.$this->encodePath($projectId),
             ['name' => $name,
                 'description' => $description]);
         unset($this->cache[$projectId]);
@@ -53,14 +53,14 @@ class Suites extends AbstractApi
      * }
      * @return mixed
      */
-    public function update(int $suiteId, array $parameters = []){
-        $suite =  $this->connector->send_post('update_suite/'.$this->encodePath($suiteId),$parameters);
+    public function update(int $suiteId, array $parameters = []) {
+        $suite = $this->connector->send_post('update_suite/'.$this->encodePath($suiteId), $parameters);
         $this->cache = [];
         return $suite;
     }
 
-    public function delete(int $suiteId){
-        $this->connector->send_post('delete_suite/'.$this->encodePath($suiteId),[]);
+    public function delete(int $suiteId) {
+        $this->connector->send_post('delete_suite/'.$this->encodePath($suiteId), []);
         $this->cache = [];
     }
 }

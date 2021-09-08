@@ -38,7 +38,7 @@ class Client
         $this->connector = $connector;
     }
 
-    public static function create(string $url, string $user, string $password){
+    public static function create(string $url, string $user, string $password) {
         $connector = new TestRailAPIClient($url);
         $connector->set_user($user);
         $connector->set_password($password);
@@ -48,68 +48,68 @@ class Client
     /**
      * @return string
      */
-    public function getUser(){
+    public function getUser() {
         return $this->connector->get_user();
     }
 
-    public function projects(){
+    public function projects() {
         return new Projects($this->connector);
     }
 
-    public function suites(){
+    public function suites() {
         return new Suites($this->connector);
     }
 
-    public function sections(){
+    public function sections() {
         return new Sections($this->connector);
     }
 
-    public function cases(){
+    public function cases() {
         return new Cases($this->connector);
     }
 
-    public function templates(){
+    public function templates() {
         return new Templates($this->connector);
     }
 
-    public function types(){
+    public function types() {
         return new Types($this->connector);
     }
 
-    public function fields(){
+    public function fields() {
         return new Fields($this->connector);
     }
 
-    public function priorities(){
+    public function priorities() {
         return new Priorities($this->connector);
     }
 
-    public function milestones(){
+    public function milestones() {
         return new Milestones($this->connector);
     }
 
-    public function plans(){
+    public function plans() {
         return new Plans($this->connector);
     }
 
-    public function configurations(){
+    public function configurations() {
         return new Configurations($this->connector);
     }
 
-    public function results(){
+    public function results() {
         return new Results($this->connector);
     }
 
-    public function statuses(){
+    public function statuses() {
         return new Statuses($this->connector);
     }
 
-    public function users(){
+    public function users() {
         return new Users($this->connector);
     }
 
-    public function api($name){
-        switch ($name){
+    public function api($name) {
+        switch ($name) {
             case 'projects':
                 return $this->projects();
             case 'suites':

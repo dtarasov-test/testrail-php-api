@@ -22,7 +22,7 @@ class SectionsTest extends TestCase
      */
     private $mockApiConnector;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->mockApiConnector = $this->getMockBuilder(ApiConnectorInterface::class)->disableOriginalConstructor()->getMock();
@@ -64,6 +64,19 @@ class SectionsTest extends TestCase
 
         $this->assertSame(['id' => 3,'name' => 'section2','parent_id' => 1],$this->sections->findByNameAndParent(1,2,'section2',1));
         $this->assertSame(['id' => 2,'name' => 'section2','parent_id' => null],$this->sections->findByNameAndParent(1,2,'section2'));
+    }
+
+    /**
+     * @test
+     */
+    public function findByParent(){
+        $this->mockApiConnector->expects($this->any())
+            ->method('send_get')
+            ->with('get_sections/1&suite_id=2')
+            ->will($this->returnValue([['id' => 1,'name' => 'section1'],['id' => 2,'name' => 'section2','parent_id' => null],['id' => 3,'name' => 'section3','parent_id' => 1],['id' => 4,'name' => 'section4','parent_id' => 1]]));
+
+        $this->assertSame([['id' => 3,'name' => 'section3','parent_id' => 1],['id' => 4,'name' => 'section4','parent_id' => 1]],$this->sections->findByParent(1,2,1));
+        $this->assertSame([['id' => 1,'name' => 'section1'],['id' => 2,'name' => 'section2','parent_id' => null]],$this->sections->findByParent(1,2));
     }
 
     /**

@@ -14,8 +14,8 @@ class Types extends AbstractApi
     private $cache = null;
     public function all()
     {
-        if($this->cache === null) {
-            $this->cache =  $this->connector->send_get('get_case_types');
+        if ($this->cache === null) {
+            $this->cache = $this->connector->send_get('get_case_types');
         }
         return $this->cache;
     }

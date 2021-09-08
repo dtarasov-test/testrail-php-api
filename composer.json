@@ -1,5 +1,5 @@
 {
-  "name": "seretos/testrail-php-api",
+  "name": "theravel/testrail-php-api",
   "description": "testrail api for packagist with php namespace",
   "keywords": [
     "testrail",
@@ -17,10 +17,10 @@
     }
   ],
   "require": {
-    "php": "^7.1"
+    "php": "^7.3|^8.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.7|^6.0"
+    "phpunit/phpunit": "^9.0"
   },
   "autoload": {
     "psr-4": {

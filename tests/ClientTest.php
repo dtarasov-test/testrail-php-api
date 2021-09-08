@@ -36,7 +36,7 @@ class ClientTest extends TestCase
      */
     private $client;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->mockConnector = $this->getMockBuilder(ApiConnectorInterface::class)->disableOriginalConstructor()->getMock();

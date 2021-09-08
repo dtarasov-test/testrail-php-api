@@ -14,15 +14,15 @@ class Plans extends AbstractApi
     private $cache = [];
     public function all(int $projectId)
     {
-        if(!isset($this->cache[$projectId])) {
-            $this->cache[$projectId] = $this->connector->send_get('get_plans/' . $this->encodePath($projectId));
+        if (!isset($this->cache[$projectId])) {
+            $this->cache[$projectId] = $this->connector->send_get('get_plans/'.$this->encodePath($projectId));
         }
         return $this->cache[$projectId];
     }
 
     public function get(int $planId)
     {
-        return $this->connector->send_get('get_plan/' . $this->encodePath($planId));
+        return $this->connector->send_get('get_plan/'.$this->encodePath($planId));
     }
 
     public function findByName(int $projectId, string $name)
@@ -46,9 +46,9 @@ class Plans extends AbstractApi
         return $plan;
     }
 
-    public function createEntry(int $planId, int $suiteId, string $name, array $configIds = [], array $runs = [], string $description = null, bool $all = true, array $cases = [], int $assignedTo = null){
+    public function createEntry(int $planId, int $suiteId, string $name, array $configIds = [], array $runs = [], string $description = null, bool $all = true, array $cases = [], int $assignedTo = null) {
         $entry = $this->connector->send_post('add_plan_entry/'.$this->encodePath($planId),
-            ['suite_id' => $suiteId,'name' => $name, 'description' => $description, 'include_all' => $all, 'case_ids' => $cases, 'config_ids' => $configIds, 'runs' => $runs,'assignedto_id' => $assignedTo]);
+            ['suite_id' => $suiteId, 'name' => $name, 'description' => $description, 'include_all' => $all, 'case_ids' => $cases, 'config_ids' => $configIds, 'runs' => $runs, 'assignedto_id' => $assignedTo]);
         $this->cache = [];
         return $entry;
     }
@@ -61,30 +61,30 @@ class Plans extends AbstractApi
      *      @var int        $milestone_id
      * }
      */
-    public function update(int $planId, array $parameters = []){
-        $plan = $this->connector->send_post('update_plan/'.$this->encodePath($planId),$parameters);
+    public function update(int $planId, array $parameters = []) {
+        $plan = $this->connector->send_post('update_plan/'.$this->encodePath($planId), $parameters);
         $this->cache = [];
         return $plan;
     }
 
-    public function updateEntry(int $planId, int $entryId, array $parameters = []){
-        $entry = $this->connector->send_post('update_plan_entry/'.$this->encodePath($planId).'/'.$this->encodePath($entryId),$parameters);
+    public function updateEntry(int $planId, int $entryId, array $parameters = []) {
+        $entry = $this->connector->send_post('update_plan_entry/'.$this->encodePath($planId).'/'.$this->encodePath($entryId), $parameters);
         $this->cache = [];
         return $entry;
     }
 
-    public function delete(int $planId){
-        $this->connector->send_post('delete_plan/'.$this->encodePath($planId),[]);
+    public function delete(int $planId) {
+        $this->connector->send_post('delete_plan/'.$this->encodePath($planId), []);
         $this->cache = [];
     }
 
-    public function deleteEntry(int $planId, int $entryId){
-        $this->connector->send_post('delete_plan_entry/'.$this->encodePath($planId).'/'.$this->encodePath($entryId),[]);
+    public function deleteEntry(int $planId, int $entryId) {
+        $this->connector->send_post('delete_plan_entry/'.$this->encodePath($planId).'/'.$this->encodePath($entryId), []);
         $this->cache = [];
     }
 
-    public function close(int $planId){
-        $plan = $this->connector->send_post('close_plan/'.$this->encodePath($planId),[]);
+    public function close(int $planId) {
+        $plan = $this->connector->send_post('close_plan/'.$this->encodePath($planId), []);
         $this->cache = [];
         return $plan;
     }

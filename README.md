@@ -1,8 +1,8 @@
 # testrail-php-api
 
-TestRail API binding for PHP (API v2, available since TestRail 3.0)
+[![Build Status](https://travis-ci.com/theravel/testrail-php-api.svg?branch=master)](https://travis-ci.com/theravel/testrail-php-api)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/theravel/testrail-php-api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/theravel/testrail-php-api/?branch=master)
 
-Learn more:
+This is fork of [seretos/testrail-php-api](https://github.com/Seretos/testrail-php-api) which provides PHP SDK for TestRail API v2.
 
-http://docs.gurock.com/testrail-api2/start
-http://docs.gurock.com/testrail-api2/accessing
+The reason of forking is to add support of PHP 8.
